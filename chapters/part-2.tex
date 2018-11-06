@@ -1,0 +1,59 @@
+\section{Part 2}
+
+When it comes to KNN there are a few hyperparameters which greatly affect the accuracy of the model. These can be the distance algorithm used and the classification algorithm used, while also manipulating the k value. For part 2 I explored the following distance algorithms
+
+\begin{itemize}
+  \item euclidean
+  \item manhattan
+  \item minkowski
+\end{itemize}
+
+There is another configurable hyper-parameter for the Minkowski algorithm which is called p.
+
+The following classification algorithms were experimented with.
+
+\begin{itemize}
+  \item vote based
+  \item weighted
+\end{itemize}
+
+Interestingly I observed that in most cases vote based classification outperformed weighted classification. For example using the combination with a K value of 3 using Euclidean distance against the training dataset, the accuracies were 76\% for vote and 75\% for weighted classification.  
+
+Manually manipulating the values is a very time-consuming task. There are a number of ways to automate the process. If we used scikit-learn, for example, we could use GridSearchCV to find the optimal values. Brute forcing the best parameters is a very computationally expensive task and in some cases not viable. GridSearchCV allows for multiprocessing to speed things up. There are also a number of algorithms we can use to take random combinations instead of every possible combination. In doing so it is true you may not get the optimal combination, however, you are likely to get close in a much shorter time. One such algorithm is a random tree forest algorithm, which can select seemingly random combinations in a clever way. 
+However as we are not using scikit-learn for this assignment, I chose to write a script to brute force the optimal combination. This has not been optimized in any way but it does give back a good result in a reasonably short amount of time for the classification problem. The combinations used are below.
+
+\begin{itemize}
+  \item k: 1 to 10
+  \item distanceAlg: ['euclidean', 'manhattan', 'minkowski']
+  \item classificationAlg: ['vote', 'weighted']
+  \item p: 1 to 10
+\end{itemize}
+
+The resulting best combination was.
+
+\begin{itemize}
+  \item k: 8
+  \item distanceAlg: 'minkowski'
+  \item classificationAlg: 'vote'
+  \item p: 3
+\end{itemize}
+
+which yielded an accuracy of 80.68\% for the trainingData2.csv dataset and 70.31\% against testData2.csv. Using just weighted without vote with the combination below
+
+\begin{itemize}
+  \item k: 1 to 10
+  \item distanceAlg: ['euclidean', 'manhattan', 'minkowski']
+  \item classificationAlg: ['weighted']
+  \item p: 1 to 10
+\end{itemize}
+
+the resulting best combination was. 
+
+\begin{itemize}
+  \item k: 8
+  \item distanceAlg: 'minkowski'
+  \item classificationAlg: 'weighted'
+  \item p: 7
+\end{itemize}
+
+This yielded an accuracy of 77.89\% for the trainingData2.csv dataset and 68.75\% against the testData2.csv dataset. Which is lower than the vote based algorithm for classification

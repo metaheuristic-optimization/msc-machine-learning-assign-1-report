@@ -1,0 +1,22 @@
+\section{Part 3 - Regression}
+
+For part 3 I utilized KNN for a simple regression algorithm. I used the K value and the following hyper-parameters for experimenting with the regression.
+
+\begin{itemize}
+  \item euclidean
+  \item manhattan
+  \item minkowski
+\end{itemize}
+
+Along with P for the Minkowski algorithm. In regression, there is no need for the classification algorithms as I used in part 2, so those are no longer needed.
+
+I again created a brute force script to find the best combination of hyper-parameters as used in part 2 of this assignment. The brute force method takes much longer to run this time as there is much more data to process.
+
+I found the optimal combination for the regression was 
+
+\begin{itemize}
+  \item k: 4
+  \item distanceAlg: euclidean
+\end{itemize}
+
+This resulted in an accuracy of 67.83\% using the trainingData.csv dataset and 51.54\% for the testData.csv dataset. The 51.54\% is slightly worrying as it is slightly over 50/50 accuracy, leading me to believe that KNN is not necessarily best suited for regression in some cases. In this case, we didn't know much about the data that we were given. A little more insight into the data or perhaps some data cleaning could have improved this score.
